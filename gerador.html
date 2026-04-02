@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Gerador de Conversa Fake - WhatsApp</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; max-width: 400px; margin: 0 auto; }
+        .chat { background: #e5ddd5; padding: 10px; border-radius: 5px; }
+        .message {
+            margin: 5px; padding: 8px 12px; border-radius: 7.5px;
+            max-width: 70%; word-wrap: break-word;
+        }
+        .received { background: white; align-self: flex-start; }
+        .sent { background: #dcf8c6; align-self: flex-end; margin-left: auto; }
+        .timestamp { font-size: 0.7em; color: #666; text-align: right; }
+        .status { font-size: 0.8em; margin-left: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Gerador de Conversa Fake</h2>
+    <div>
+        <input type="text" id="user1" placeholder="Nome do Usuário 1" value="Você">
+        <input type="text" id="user2" placeholder="Nome do Usuário 2" value="Contato">
+    </div>
+    <button onclick="gerarConversa()">Gerar Conversa</button>
+    <div id="chat" class="chat"></div>
+
+    <script>
+        // Função principal
+        function gerarConversa() {
+            const chatDiv = document.getElementById('chat');
+            chatDiv.innerHTML = ''; // Limpa o chat anterior
+
+            const user1 = document.getElementById('user1').value;
+            const user2 = document.getElementById('user2').value;
+            const mensagens = gerarMensagensFake(user1, user2);
+
+            mensagens.forEach(msg => {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `message ${msg.sender === user1 ? 'sent' : 'received'}`;
+
+                // Conteúdo da mensagem
+                msgDiv.innerHTML = `
+                    ${msg.content}
+                    <div class="timestamp">
+                        ${msg.time} <span class="status">${msg.status}</span>
+                    </div>
+                `;
+                chatDiv.appendChild(msgDiv);
+            });
+        }
+
+        // Gera mensagens fake
+        function gerarMensagensFake(user1, user2) {
+            const mensagens = [];
+            const horarios = gerarHorarios(5 + Math.floor(Math.random() * 10)); // 5-15 mensagens
+
+            // Tipos de mensagens possíveis
+            const tipos = [
+                { tipo: "texto", conteudo: ["Oi", "Tudo bem?", "Vou te mandar uma coisa", "Você viu isso?", "Preciso te contar uma novidade"] },
+                { tipo: "link", conteudo: ["https://bit.ly/3xYz9", "Confere esse vídeo: https://youtu.be/abc123"] },
+                { tipo: "midia", conteudo: ["📷 Foto", "🎥 Vídeo", "📄 Documento"] },
+                { tipo: "reacao", conteudo: ["👍", "❤️", "😂"] }
+            ];
+
+            // Alternar entre remetentes
+            let remetenteAtual = user1;
+            horarios.forEach((hora, i) => {
+                const tipo = tipos[Math.floor(Math.random() * tipos.length)];
+                const conteudo = tipo.conteudo[Math.floor(Math.random() * tipo.conteudo.length)];
+
+                // Status da mensagem (✓, ✓✓, ✓✓ azul)
+                let status = "✓";
+                if (i > 2) status = "✓✓";
+                if (i > 5) status = "✓✓"; // Azul (simulado)
+
+                mensagens.push({
+                    sender: remetenteAtual,
+                    content: conteudo,
+                    time: hora,
+                    status: status
+                });
+
+                // Troca o remetente a cada 1-3 mensagens
+                if (i % (1 + Math.floor(Math.random() * 3)) === 0) {
+                    remetenteAtual = remetenteAtual === user1 ? user2 : user1;
+                }
+            });
+
+            return mensagens;
+        }
+
+        // Gera horários realistas (últimas 24h)
+        function gerarHorarios(qtd) {
+            const horarios = [];
+            const agora = new Date();
+            for (let i = 0; i < qtd; i++) {
+                const minutosAtras = Math.floor(Math.random() * 1440); // 0-24h
+                const hora = new Date(agora - minutosAtras * 60000);
+                horarios.push(hora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+            }
+            return horarios.sort(); // Ordena do mais antigo para o mais recente
+        }
+    </script>
+</body>
+</html>
