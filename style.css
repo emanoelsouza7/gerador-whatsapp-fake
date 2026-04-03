@@ -260,6 +260,6 @@ body {
     display: none;
 }
 .chat-area {
-    background: url('./assets/background.png') repeat;
+    background: url('./assets/background.webp') repeat;
     background-color: var(--whatsapp-gray);
 }
