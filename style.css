@@ -1,22 +1,19 @@
 /* Reset e variáveis */
 :root {
     --whatsapp-green: #25D366;
-    --whatsapp-dark: #128C7E;
+    --whatsapp-dark: #075E54;
     --whatsapp-light: #DCF8C6;
     --whatsapp-gray: #ECE5DD;
     --text-dark: #111B21;
     --text-light: #667781;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+    --bg-color: #f0f2f5;
 }
 
 body {
-    background: #f0f2f5;
+    background: var(--bg-color);
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -31,6 +28,7 @@ body {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden;
+    background: #fff;
 }
 
 /* Barra lateral (contatos) */
@@ -47,7 +45,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
-    background: #f0f2f5;
+    background: var(--bg-color);
     border-bottom: 1px solid #e9edef;
 }
 
@@ -62,13 +60,14 @@ body {
     margin-left: 15px;
     color: var(--text-light);
     cursor: pointer;
+    font-size: 18px;
 }
 
 .search-bar {
     display: flex;
     align-items: center;
     padding: 10px;
-    background: #f0f2f5;
+    background: var(--bg-color);
     border-bottom: 1px solid #e9edef;
 }
 
@@ -84,11 +83,13 @@ body {
     background: #fff;
     padding: 8px;
     border-radius: 8px;
+    color: var(--text-dark);
 }
 
 .chats {
     flex: 1;
     overflow-y: auto;
+    background: #fff;
 }
 
 .chat-item {
@@ -96,6 +97,7 @@ body {
     padding: 10px 15px;
     cursor: pointer;
     border-bottom: 1px solid #e9edef;
+    transition: background 0.2s;
 }
 
 .chat-item:hover {
@@ -110,6 +112,7 @@ body {
 .chat-name {
     font-weight: 600;
     color: var(--text-dark);
+    font-size: 16px;
 }
 
 .last-message {
@@ -132,6 +135,7 @@ body {
     display: flex;
     flex-direction: column;
     background: url('assets/background.png') repeat;
+    background-color: var(--whatsapp-gray);
 }
 
 .chat-header {
@@ -139,7 +143,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
-    background: #f0f2f5;
+    background: var(--bg-color);
     border-bottom: 1px solid #e9edef;
 }
 
@@ -155,6 +159,7 @@ body {
 .chat-name {
     font-weight: 600;
     color: var(--text-dark);
+    font-size: 16px;
 }
 
 .status {
@@ -166,6 +171,7 @@ body {
     margin-left: 15px;
     color: var(--text-light);
     cursor: pointer;
+    font-size: 18px;
 }
 
 .chat-messages {
@@ -183,37 +189,43 @@ body {
     margin-bottom: 5px;
     position: relative;
     word-wrap: break-word;
+    font-size: 14.5px;
+    line-height: 1.4;
 }
 
 .received {
     align-self: flex-start;
     background: #fff;
+    color: var(--text-dark);
     border-top-left-radius: 0;
 }
 
 .sent {
     align-self: flex-end;
     background: var(--whatsapp-light);
+    color: var(--text-dark);
     border-top-right-radius: 0;
 }
 
-.timestamp {
+.message .timestamp {
     font-size: 11px;
     color: var(--text-light);
     text-align: right;
     margin-top: 3px;
 }
 
-.status {
+.message .status {
     font-size: 11px;
     margin-left: 5px;
+    color: var(--whatsapp-green);
 }
 
+/* Input de mensagem */
 .chat-input {
     display: flex;
     align-items: center;
     padding: 10px;
-    background: #f0f2f5;
+    background: var(--bg-color);
     border-top: 1px solid #e9edef;
 }
 
@@ -221,6 +233,7 @@ body {
     color: var(--text-light);
     margin: 0 5px;
     cursor: pointer;
+    font-size: 20px;
 }
 
 .chat-input input {
@@ -230,47 +243,16 @@ body {
     padding: 10px;
     border-radius: 8px;
     margin: 0 5px;
-}
-
-/* Painel de status */
-.status-panel {
-    width: 35%;
     background: #fff;
-    border-right: 1px solid #e9edef;
+    color: var(--text-dark);
+    font-size: 14px;
 }
 
-.status-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    background: #f0f2f5;
-    border-bottom: 1px solid #e9edef;
-}
-
-.status-list {
-    flex: 1;
-    overflow-y: auto;
-}
-
-.status-item {
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    cursor: pointer;
-}
-
-.status-item:hover {
-    background: #f5f6f6;
-}
-
-.status-pic {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--whatsapp-green);
-    margin-right: 10px;
+/* Barra de status (online) */
+.status-online {
+    color: var(--whatsapp-green);
+    font-size: 12px;
+    margin-top: 2px;
 }
 
 /* Ocultar elementos */
