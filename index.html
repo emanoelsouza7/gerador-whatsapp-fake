@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="assets/icons/whatsapp-icon.png">
+</head>
+<body>
+    <div class="app">
+        <!-- Barra lateral (contatos) -->
+        <div class="sidebar">
+            <div class="header">
+                <img src="assets/profile-pics/user.jpg" class="profile-pic" id="user-pic">
+                <div class="header-icons">
+                    <i class="fas fa-circle-notch"></i>
+                    <i class="fas fa-comment-dots"></i>
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+            </div>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Pesquisar ou começar uma nova conversa">
+            </div>
+            <div class="chats" id="chats">
+                <!-- Contatos serão carregados via JS -->
+            </div>
+        </div>
+
+        <!-- Área de conversa -->
+        <div class="chat-area" id="chat-area">
+            <div class="chat-header">
+                <div class="chat-info">
+                    <img src="assets/profile-pics/contact.jpg" class="profile-pic" id="contact-pic">
+                    <div class="chat-name-status">
+                        <span id="contact-name">Selecione um contato</span>
+                        <span class="status" id="contact-status">online</span>
+                    </div>
+                </div>
+                <div class="chat-icons">
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-paperclip"></i>
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <!-- Mensagens serão carregadas via JS -->
+            </div>
+            <div class="chat-input">
+                <i class="fas fa-smile"></i>
+                <i class="fas fa-paperclip"></i>
+                <input type="text" id="message-input" placeholder="Digite uma mensagem">
+                <i class="fas fa-microphone"></i>
+            </div>
+        </div>
+
+        <!-- Painel de status/chamadas (oculto por padrão) -->
+        <div class="status-panel hidden" id="status-panel">
+            <div class="status-header">
+                <h3>Status</h3>
+                <i class="fas fa-ellipsis-v"></i>
+            </div>
+            <div class="status-list" id="status-list">
+                <!-- Status serão carregados via JS -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
